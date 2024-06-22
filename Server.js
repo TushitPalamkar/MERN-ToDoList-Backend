@@ -1,0 +1,13 @@
+const express=require('express')
+const mongoose=require('mongoose')
+const router=require('./routes/ToDoRoutes')
+const cors=require('cors')
+require('dotenv').config()
+const app=express()
+app.use(express.json())
+app.use(cors())
+app.use(router)
+const PORT= 5000
+mongoose.connect(process.env.MONGODB_URL)
+.then(console.log('Connection is successfull')).catch((error)=>{console.log(error)})
+app.listen(PORT,()=>{console.log(`Server is listening on port ${PORT}`)})
